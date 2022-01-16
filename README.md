@@ -40,3 +40,6 @@ Things you may want to cover:
 
 * Postman Collection
     - Api v1 Users available in folder "Postman Collection"
+
+* Demo
+    - V1: https://poc-users-gperez-hboas.ondigitalocean.app/api-docs
