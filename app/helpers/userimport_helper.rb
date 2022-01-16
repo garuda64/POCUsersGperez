@@ -5,11 +5,11 @@ module UserimportHelper
         response = fetchUsers(currentPage)
         jsonResponse = JSON.parse(response)
         if !jsonResponse['data'].empty?
-            puts "<<<<<<<<<<<<<<"
-            puts jsonResponse['data'].to_json
             jsonResponse['data'].each do |userfromJson|
                 User.create({ email: userfromJson['email'], first_name: userfromJson['first_name'], last_name: userfromJson['last_name'], avatar: userfromJson['avatar'] })
             end
+        else
+            puts "No elements found"
         end
     end
 end
