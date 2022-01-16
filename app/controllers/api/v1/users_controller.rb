@@ -1,11 +1,10 @@
 class Api::V1::UsersController < ApplicationController
-  before_action :set_user, only: [:show, :update, :destroy]
+  before_action :set_user, only: [:show, :update]#, :destroy]
   before_action :set_page, only: [:index]
   before_action :validate_credentials, only: [:show]
 
   # GET /users
   def index
-    puts ">>>>>>>>>>>>>>>>>>>>>> #{ @page }"
     @users = User.order(created_at: :asc).limit(5).offset(@page * 5)
     render json: @users
   end
@@ -36,9 +35,9 @@ class Api::V1::UsersController < ApplicationController
   end
 
   # DELETE /users/1
-  def destroy
-    @user.destroy
-  end
+  # def destroy
+  #   @user.destroy
+  # end
 
   private
     # Use for get pagination

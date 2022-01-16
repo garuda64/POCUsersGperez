@@ -1,0 +1,128 @@
+---
+openapi: 3.0.1
+info:
+  title: API V1 Users
+  version: v1
+paths:
+  "/api/v1/users":    
+    get:
+      summary: list users
+      responses:
+        '200':
+          description: successful
+      parameters:
+      - in: query
+        name: page
+        description: page number (starts in 0 value)
+        required: false
+        schema:
+          type: integer
+    post:
+      summary: create user
+      requestBody:
+        description: Optional description in *Markdown*
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+            examples:
+              user:
+                summary: An User example
+                value:
+                  email: juan.franco@mail.com
+                  first_name: Juan
+                  last_name: Franco
+                  avatar: http://myimage.com/1.png
+      responses:
+        '200':
+          description: successful
+  "/api/v1/users/{id}":
+    parameters:
+    - name: id
+      in: path
+      description: id
+      required: true
+      schema:
+        type: string    
+    get:
+      summary: show user
+      responses:
+        '200':
+          description: successful
+      parameters:
+      - in: header
+        name: client-id
+        schema:
+          type: string
+        required: true   
+      - in: header
+        name: client-secret
+        schema:
+          type: string
+        required: true    
+    patch:
+      summary: update user      
+      responses:
+        '200':
+          description: successful
+    put:
+      summary: update user
+      requestBody:
+        description: Optional description in *Markdown*
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/User'
+            examples:
+              user:
+                summary: An User example
+                value:
+                  email: juan.franco@mail.com
+                  first_name: Juan
+                  last_name: Franco
+                  avatar: http://myimage.com/1.png
+      responses:
+        '200':
+          description: successful
+    # delete:
+    #   summary: delete user
+    #   responses:
+    #     '200':
+    #       description: successful
+servers:
+- url: https://{defaultHost}
+  variables:
+    defaultHost:
+      default: localhost:3000
+components:
+  schemas:
+    User:
+      title: User
+      type: object
+      properties:
+        email:
+          type: string
+          description: User email
+        first_name:
+          type: string
+          description: User first_name
+        last_name:
+          type: string
+          description: User last_name
+        avatar:
+          type: string
+          description: User avatar
+      required:
+        - email
+        - first_name
+examples:
+  user:
+    summary: An example of a User
+    value:
+      email: juan.franco@mail.com
+      first_name: Juan
+      last_name: Franco
+      avatar: http://myimage.com/1.png
+        
